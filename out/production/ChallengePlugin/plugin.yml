@@ -1,0 +1,14 @@
+name: Challenge
+version: 0.1.6
+author: Chaosfreak93
+api-version: 1.16
+main: de.beyonddark.ChallengePlugin.Main
+commands:
+  timer:
+    description: Stop or resume the timer
+    usage: /timer <start|stop|reset>
+    permission: challenge.timer
+  settings:
+    description: Open settings
+    usage: /settings
+    permission: challenge.settings
