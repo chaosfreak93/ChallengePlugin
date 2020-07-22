@@ -41,7 +41,7 @@ public class MaxLebenSettingsInv {
         inv.setItem(10, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(11, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(12, createGuiItem(Material.GREEN_WOOL, "§a+1 HP"));
-        inv.setItem(16, createGuiItem(Material.REDSTONE, "§aMaximale Leben", "", " §9§nBeschreibung§r§8:", "  §7Setze die §9maximalen Leben§7,", "  §7welche die §9Spieler §7haben sollen.", "", " §9§nEigenschaften§r§8:", "  §7Maximale Leben§r§8: §2" + SpielregelConfig.get().getInt("MaxLeben") + " HP", "", "§a§oGrün§r§8: §9+1 HP", "§c§oRot§r§8: §9-1 HP"));
+        inv.setItem(13, createGuiItem(Material.REDSTONE, "§aMaximale Leben", "", " §9§nBeschreibung§r§8:", "  §7Setze die §9maximalen Leben§7,", "  §7welche die §9Spieler §7haben sollen.", "", " §9§nEigenschaften§r§8:", "  §7Maximale Leben§r§8: §2" + SpielregelConfig.get().getInt("MaxLeben") + " HP", "", "§a§oGrün§r§8: §9+1 HP", "§c§oRot§r§8: §9-1 HP"));
         inv.setItem(14, createGuiItem(Material.RED_WOOL, "§c-1 HP"));
         inv.setItem(15, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(16, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));

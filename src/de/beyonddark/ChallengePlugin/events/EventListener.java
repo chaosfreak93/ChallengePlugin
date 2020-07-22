@@ -12,17 +12,14 @@ import de.beyonddark.ChallengePlugin.inventorys.Spielregel.MaxLebenSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.Spielregel.SoupSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.SpielregelInv;
 import de.beyonddark.ChallengePlugin.other.Scoreboard;
+import de.beyonddark.ChallengePlugin.other.Timer;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
@@ -47,6 +44,7 @@ public class EventListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         e.setQuitMessage(ChatColor.RED + "<< " + ChatColor.GRAY + p.getName());
+        Timer.stop(p);
     }
 
     @EventHandler
