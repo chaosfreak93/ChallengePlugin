@@ -6,6 +6,7 @@ package de.beyonddark.ChallengePlugin.other;
 
 import de.beyonddark.ChallengePlugin.files.MainConfig;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class Timer {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            p.setGameMode(GameMode.SURVIVAL);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage("§r§7§lDer Timer §r§a§lwurde gestartet§r§7§l.§r");
                 player.sendTitle("§r§7§lDer Timer", "§r§a§lwurde gestartet§r§7§l.§r", 15,20, 15);
@@ -54,6 +56,7 @@ public class Timer {
                 e.printStackTrace();
             }
             task = 0;
+            p.setGameMode(GameMode.CREATIVE);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage("§r§7§lDer Timer §r§a§lwurde pausiert§r§7§l.§r");
                 player.sendTitle("§r§7§lDer Timer", "§r§a§lwurde pausiert§r§7§l.§r", 15,20, 15);
