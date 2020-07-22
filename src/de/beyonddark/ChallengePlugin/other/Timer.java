@@ -17,6 +17,7 @@ public class Timer {
     public static int task = 0;
 
     public static void resume(Player p) {
+        MainConfig.reload();
         if (task < 2) {
             task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("Challenge")), new Runnable() {
                 @Override
@@ -47,6 +48,7 @@ public class Timer {
     }
 
     public static void stop(Player p) {
+        MainConfig.reload();
         if (task > 0) {
             Bukkit.getScheduler().cancelTask(task);
             MainConfig.set().set("timerPaused", true);
@@ -67,6 +69,7 @@ public class Timer {
     }
 
     public static void reset() {
+        MainConfig.reload();
         MainConfig.set().set("timerTime", 0);
         try {
             MainConfig.save();
