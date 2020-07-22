@@ -13,6 +13,7 @@ import de.beyonddark.ChallengePlugin.inventorys.Spielregel.SoupSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.SpielregelInv;
 import de.beyonddark.ChallengePlugin.other.Scoreboard;
 import de.beyonddark.ChallengePlugin.other.Timer;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -44,6 +45,15 @@ public class EventListener implements Listener {
         } else {
             p.setGameMode(GameMode.SURVIVAL);
         }
+        if (SpielregelConfig.get().getBoolean("MaxLebenStatus")) {
+            p.setHealth(SpielregelConfig.get().getInt("MaxLeben"));
+            p.setHealthScale(SpielregelConfig.get().getInt("MaxLeben"));
+            p.setHealthScaled(true);
+        } else {
+            p.setHealth(20);
+            p.setHealthScale(20);
+            p.setHealthScaled(false);
+        };
     }
 
     @EventHandler
@@ -182,6 +192,10 @@ public class EventListener implements Listener {
                     SpielregelConfig.set().set("MaxLebenStatus", !SpielregelConfig.set().getBoolean("MaxLebenStatus"));
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
+                    if (!SpielregelConfig.set().getBoolean("MaxLebenStatus")) {
+                        p.setHealthScale(20);
+                        p.setHealth(20);
+                    }
                     SpielregelInv inv = new SpielregelInv();
                     inv.openInventory(p);
                 } else if (clickType.equals(ClickType.RIGHT)) {
@@ -228,20 +242,24 @@ public class EventListener implements Listener {
             e.setCancelled(true);
         } else if (e.getView().getTitle().equals("§6Einstellungen §8- §aMax Leben Settings")) {
             if (whatWasClicked.getType().equals(Material.GREEN_WOOL)) {
-                int soupHeal = SpielregelConfig.get().getInt("MaxLeben");
-                if (soupHeal <= 19) {
-                    SpielregelConfig.set().set("MaxLeben", soupHeal + 1);
+                int maxLeben = SpielregelConfig.get().getInt("MaxLeben");
+                if (maxLeben <= 19) {
+                    SpielregelConfig.set().set("MaxLeben", maxLeben + 1);
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
+                    p.setHealthScale(maxLeben);
+                    p.setHealth(maxLeben);
                     MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
                     inv.openInventory(p);
                 }
             } else if (whatWasClicked.getType().equals(Material.RED_WOOL)) {
-                int soupHeal = SpielregelConfig.get().getInt("MaxLeben");
-                if (soupHeal >= 2) {
-                    SpielregelConfig.set().set("MaxLeben", soupHeal - 1);
+                int maxLeben = SpielregelConfig.get().getInt("MaxLeben");
+                if (maxLeben >= 2) {
+                    SpielregelConfig.set().set("MaxLeben", maxLeben - 1);
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
+                    p.setHealthScale(maxLeben);
+                    p.setHealth(maxLeben);
                     MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
                     inv.openInventory(p);
                 }
