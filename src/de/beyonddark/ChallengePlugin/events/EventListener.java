@@ -13,7 +13,6 @@ import de.beyonddark.ChallengePlugin.inventorys.Spielregel.SoupSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.SpielregelInv;
 import de.beyonddark.ChallengePlugin.other.Scoreboard;
 import de.beyonddark.ChallengePlugin.other.Timer;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -53,7 +52,7 @@ public class EventListener implements Listener {
             p.setHealth(20);
             p.setHealthScale(20);
             p.setHealthScaled(false);
-        };
+        }
     }
 
     @EventHandler
@@ -189,13 +188,15 @@ public class EventListener implements Listener {
             } else if (Objects.requireNonNull(whatWasClicked.getItemMeta()).getDisplayName().equals("§aMaximale Leben")) {
                 p.closeInventory();
                 if (clickType.equals(ClickType.LEFT)) {
-                    SpielregelConfig.set().set("MaxLebenStatus", !SpielregelConfig.set().getBoolean("MaxLebenStatus"));
+                    SpielregelConfig.set().set("MaxLebenStatus", !SpielregelConfig.get().getBoolean("MaxLebenStatus"));
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
-                    if (!SpielregelConfig.set().getBoolean("MaxLebenStatus")) {
+                    if (!SpielregelConfig.get().getBoolean("MaxLebenStatus")) {
                         p.setHealthScale(20);
-                        p.setHealth(20);
+                    } else {
+                        p.setHealthScale(SpielregelConfig.get().getInt("MaxLeben"));
                     }
+                    p.setHealth(20);
                     SpielregelInv inv = new SpielregelInv();
                     inv.openInventory(p);
                 } else if (clickType.equals(ClickType.RIGHT)) {
@@ -248,7 +249,7 @@ public class EventListener implements Listener {
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
                     p.setHealthScale(maxLeben);
-                    p.setHealth(maxLeben);
+                    p.setHealth(20);
                     MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
                     inv.openInventory(p);
                 }
@@ -259,7 +260,7 @@ public class EventListener implements Listener {
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
                     p.setHealthScale(maxLeben);
-                    p.setHealth(maxLeben);
+                    p.setHealth(20);
                     MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
                     inv.openInventory(p);
                 }

@@ -19,16 +19,13 @@ public class Timer {
     public static void resume(Player p) {
         MainConfig.reload();
         if (task < 2) {
-            task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("Challenge")), new Runnable() {
-                @Override
-                public void run() {
-                    int timer = MainConfig.get().getInt("timerTime");
-                    MainConfig.set().set("timerTime", timer + 1);
-                    try {
-                        MainConfig.save();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("Challenge")), () -> {
+                int timer = MainConfig.get().getInt("timerTime");
+                MainConfig.set().set("timerTime", timer + 1);
+                try {
+                    MainConfig.save();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }, 0, 20);
             MainConfig.set().set("timerPaused", false);
