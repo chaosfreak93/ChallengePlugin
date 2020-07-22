@@ -30,6 +30,10 @@ public class SpielregelConfig {
         return customFile;
     }
 
+    public static FileConfiguration set() {
+        return customFile = customFile;
+    }
+
     public static void save() throws IOException {
         customFile.save(file);
     }
