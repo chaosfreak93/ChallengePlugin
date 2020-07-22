@@ -9,6 +9,8 @@ import de.beyonddark.ChallengePlugin.commands.TimerCommand;
 import de.beyonddark.ChallengePlugin.commands.TimerTabCompletion;
 import de.beyonddark.ChallengePlugin.events.EventListener;
 import de.beyonddark.ChallengePlugin.files.*;
+import org.bukkit.Difficulty;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -49,6 +51,7 @@ public class Main extends JavaPlugin {
             SpielregelConfig.setup();
             SpielregelConfig.get().addDefault("Soup", false);
             SpielregelConfig.get().addDefault("SoupHeal", 4);
+            SpielregelConfig.get().addDefault("Difficulty", "PEACEFUL");
             SpielregelConfig.get().addDefault("MaxLebenStatus", false);
             SpielregelConfig.get().addDefault("MaxLeben", 20);
             SpielregelConfig.get().addDefault("Schadensanzeige", false);
@@ -67,6 +70,9 @@ public class Main extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("settings")).setExecutor(new SettingsCommand());
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getPluginManager().registerEvents(new EventListener(), this);
+        for (World world : this.getServer().getWorlds()) {
+            world.setDifficulty(Difficulty.valueOf(SpielregelConfig.get().getString("Difficulty")));
+        }
     }
 
     @Override
