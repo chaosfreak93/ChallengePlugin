@@ -18,7 +18,6 @@ import java.util.Objects;
 public class Scoreboard {
 
     public static void setup(Player p) {
-        System.out.println("Test");
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("Challenge")), () -> {
             assert manager != null;
@@ -28,7 +27,7 @@ public class Scoreboard {
             if (MainConfig.get().getBoolean("timerPaused")) {
                 Score timer = objective.getScore("  " + ChatColor.GOLD + "Timer: " + ChatColor.GRAY + "pausiert" + " ");
                 timer.setScore(1);
-            } else  {
+            } else {
                 Score timer = objective.getScore("  " + ChatColor.GOLD + "Timer: " + ChatColor.GRAY + calculateTime() + " ");
                 timer.setScore(1);
             }
