@@ -14,6 +14,7 @@ import de.beyonddark.ChallengePlugin.inventorys.SpielregelInv;
 import de.beyonddark.ChallengePlugin.other.Scoreboard;
 import de.beyonddark.ChallengePlugin.other.Timer;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,6 +39,11 @@ public class EventListener implements Listener {
         Player p = e.getPlayer();
         Scoreboard.setup(p);
         e.setJoinMessage(ChatColor.GREEN + ">> " + ChatColor.GRAY + p.getName());
+        if (MainConfig.get().getBoolean("timerPaused")) {
+            p.setGameMode(GameMode.CREATIVE);
+        } else {
+            p.setGameMode(GameMode.SURVIVAL);
+        }
     }
 
     @EventHandler
@@ -89,7 +95,7 @@ public class EventListener implements Listener {
                 inv.openInventory(p);
             } else if (whatWasClicked.getType() == Material.GRASS_BLOCK) {
                 p.closeInventory();
-                p.sendTitle("§4SOON...", "", 10,15, 10);
+                p.sendTitle("§4SOON...", "", 10, 15, 10);
             } else if (whatWasClicked.getType() == Material.IRON_PICKAXE) {
                 p.closeInventory();
             } else if (whatWasClicked.getType() == Material.MAP) {
@@ -98,8 +104,7 @@ public class EventListener implements Listener {
                 inv.openInventory(p);
             }
             e.setCancelled(true);
-        }
-        if (e.getView().getTitle().equals("§6Einstellungen §8- §cHerausforderung")) {
+        } else if (e.getView().getTitle().equals("§6Einstellungen §8- §cHerausforderung")) {
             if (whatWasClicked.getType() == Material.DRAGON_HEAD) {
                 p.closeInventory();
                 HerausforderungInv inv = new HerausforderungInv();
@@ -138,8 +143,7 @@ public class EventListener implements Listener {
                 inv.openInventory(p);
             }
             e.setCancelled(true);
-        }
-        if (e.getView().getTitle().equals("§6Einstellungen §8- §aSpielregeln")) {
+        } else if (e.getView().getTitle().equals("§6Einstellungen §8- §aSpielregeln")) {
             if (whatWasClicked.getType().equals(Material.MUSHROOM_STEW)) {
                 p.closeInventory();
                 if (clickType.equals(ClickType.LEFT)) {
@@ -197,8 +201,7 @@ public class EventListener implements Listener {
                 inv.openInventory(p);
             }
             e.setCancelled(true);
-        }
-        if (e.getView().getTitle().equals("§6Einstellungen §8- §aSoup Settings")) {
+        } else if (e.getView().getTitle().equals("§6Einstellungen §8- §aSoup Settings")) {
             if (whatWasClicked.getType().equals(Material.GREEN_WOOL)) {
                 int soupHeal = SpielregelConfig.get().getInt("SoupHeal");
                 if (soupHeal <= 9) {
@@ -215,6 +218,31 @@ public class EventListener implements Listener {
                     SpielregelConfig.save();
                     SpielregelConfig.reload();
                     SoupSettingsInv inv = new SoupSettingsInv();
+                    inv.openInventory(p);
+                }
+            } else if (whatWasClicked.getType().equals(Material.BARRIER)) {
+                p.closeInventory();
+                SpielregelInv inv = new SpielregelInv();
+                inv.openInventory(p);
+            }
+            e.setCancelled(true);
+        } else if (e.getView().getTitle().equals("§6Einstellungen §8- §aMax Leben Settings")) {
+            if (whatWasClicked.getType().equals(Material.GREEN_WOOL)) {
+                int soupHeal = SpielregelConfig.get().getInt("MaxLeben");
+                if (soupHeal <= 19) {
+                    SpielregelConfig.set().set("MaxLeben", soupHeal + 1);
+                    SpielregelConfig.save();
+                    SpielregelConfig.reload();
+                    MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
+                    inv.openInventory(p);
+                }
+            } else if (whatWasClicked.getType().equals(Material.RED_WOOL)) {
+                int soupHeal = SpielregelConfig.get().getInt("MaxLeben");
+                if (soupHeal >= 2) {
+                    SpielregelConfig.set().set("MaxLeben", soupHeal - 1);
+                    SpielregelConfig.save();
+                    SpielregelConfig.reload();
+                    MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
                     inv.openInventory(p);
                 }
             } else if (whatWasClicked.getType().equals(Material.BARRIER)) {
