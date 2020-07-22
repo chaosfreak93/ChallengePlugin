@@ -8,6 +8,7 @@ import de.beyonddark.ChallengePlugin.files.MainConfig;
 import de.beyonddark.ChallengePlugin.files.SpielregelConfig;
 import de.beyonddark.ChallengePlugin.inventorys.EinstellungInv;
 import de.beyonddark.ChallengePlugin.inventorys.HerausforderungInv;
+import de.beyonddark.ChallengePlugin.inventorys.Spielregel.MaxLebenSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.Spielregel.SoupSettingsInv;
 import de.beyonddark.ChallengePlugin.inventorys.SpielregelInv;
 import de.beyonddark.ChallengePlugin.other.Scoreboard;
@@ -144,12 +145,9 @@ public class EventListener implements Listener {
             if (whatWasClicked.getType().equals(Material.MUSHROOM_STEW)) {
                 p.closeInventory();
                 if (clickType.equals(ClickType.LEFT)) {
-                    if (SpielregelConfig.set().getBoolean("Soup")) {
-                        SpielregelConfig.set().set("Soup", false);
-                    } else if (!SpielregelConfig.get().getBoolean("Soup")) {
-                        SpielregelConfig.set().set("Soup", true);
-                    }
+                    SpielregelConfig.set().set("Soup", !SpielregelConfig.set().getBoolean("Soup"));
                     SpielregelConfig.save();
+                    SpielregelConfig.reload();
                     SpielregelInv inv = new SpielregelInv();
                     inv.openInventory(p);
                 } else if (clickType.equals(ClickType.RIGHT)) {
@@ -178,16 +176,21 @@ public class EventListener implements Listener {
                 inv.openInventory(p);
             } else if (Objects.requireNonNull(whatWasClicked.getItemMeta()).getDisplayName().equals("§aMaximale Leben")) {
                 p.closeInventory();
-                SpielregelInv inv = new SpielregelInv();
-                inv.openInventory(p);
+                if (clickType.equals(ClickType.LEFT)) {
+                    SpielregelConfig.set().set("MaxLebenStatus", !SpielregelConfig.set().getBoolean("MaxLebenStatus"));
+                    SpielregelConfig.save();
+                    SpielregelConfig.reload();
+                    SpielregelInv inv = new SpielregelInv();
+                    inv.openInventory(p);
+                } else if (clickType.equals(ClickType.RIGHT)) {
+                    MaxLebenSettingsInv inv = new MaxLebenSettingsInv();
+                    inv.openInventory(p);
+                }
             } else if (whatWasClicked.getType() == Material.REDSTONE_LAMP) {
                 p.closeInventory();
-                if (SpielregelConfig.get().getBoolean("Schadensanzeige")) {
-                    SpielregelConfig.set().set("Schadensanzeige", false);
-                } else if (!SpielregelConfig.get().getBoolean("Schadensanzeige")) {
-                    SpielregelConfig.set().set("Schadensanzeige", true);
-                }
+                SpielregelConfig.set().set("Schadensanzeige", !SpielregelConfig.get().getBoolean("Schadensanzeige"));
                 SpielregelConfig.save();
+                SpielregelConfig.reload();
                 SpielregelInv inv = new SpielregelInv();
                 inv.openInventory(p);
             } else if (whatWasClicked.getType() == Material.BARRIER) {
