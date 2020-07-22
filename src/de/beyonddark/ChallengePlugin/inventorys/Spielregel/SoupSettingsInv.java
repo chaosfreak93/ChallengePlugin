@@ -41,7 +41,7 @@ public class SoupSettingsInv {
         inv.setItem(10, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(11, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(12, createGuiItem(Material.GREEN_WOOL, "§a+1 HP"));
-        inv.setItem(13,createGuiItem(Material.MUSHROOM_STEW, "§aSoup", "", " §9§nBeschreibung§r§8:", "  §7Heile dich mit §9Pilzsuppen§7,", "  §9Borschtsch §7und §9Kaninchenragout§7.", "", " §9§nEigenschaften§r§8:", "  §7Heilung durch Suppen§r§8: §2" + SpielregelConfig.get().getInt("SoupHeal") + "HP", "", "§a§oGrün§r§8: §9+1 HP", "§c§oRot§r§8: §9-1 HP"));
+        inv.setItem(13, createGuiItem(Material.MUSHROOM_STEW, "§aSoup", "", " §9§nBeschreibung§r§8:", "  §7Heile dich mit §9Pilzsuppen§7,", "  §9Borschtsch §7und §9Kaninchenragout§7.", "", " §9§nEigenschaften§r§8:", "  §7Heilung durch Suppen§r§8: §2" + SpielregelConfig.get().getInt("SoupHeal") + "HP", "", "§a§oGrün§r§8: §9+1 HP", "§c§oRot§r§8: §9-1 HP"));
         inv.setItem(14, createGuiItem(Material.RED_WOOL, "§c-1 HP"));
         inv.setItem(15, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(16, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
