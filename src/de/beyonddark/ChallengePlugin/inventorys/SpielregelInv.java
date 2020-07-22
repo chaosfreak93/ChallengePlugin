@@ -4,6 +4,7 @@
 
 package de.beyonddark.ChallengePlugin.inventorys;
 
+import de.beyonddark.ChallengePlugin.files.SpielregelConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class SpielregelInv {
 
     // You can call this whenever you want to put the items in
     public void initializeItems() {
+        SpielregelConfig.reload();
         inv.setItem(0,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(1,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(2,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
@@ -36,16 +38,24 @@ public class SpielregelInv {
         inv.setItem(7,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(8,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(9,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
-        inv.setItem(10,createGuiItem(Material.DRAGON_HEAD, " "));
-        inv.setItem(11,createGuiItem(Material.WITHER_SKELETON_SKULL, " "));
-        inv.setItem(12,createGuiItem(Material.SKELETON_SKULL, " "));
-        inv.setItem(13,createGuiItem(Material.GRASS_BLOCK, " "));
-        inv.setItem(14,createGuiItem(Material.CRAFTING_TABLE, " "));
-        inv.setItem(15,createGuiItem(Material.VILLAGER_SPAWN_EGG, " "));
-        inv.setItem(16,createGuiItem(Material.STONE_PICKAXE, " "));
+        if (SpielregelConfig.get().getBoolean("Soup")) {
+            inv.setItem(10,createGuiItem(Material.MUSHROOM_STEW, "§aSoup", "", " §9§nBeschreibung§r§8:", "  §7Heile dich mit §9Pilzsuppen§7,", "  §9Borschtsch §7und §9Kaninchenragout§7.", "", " §9§nEigenschaften§r§8:", "  §7Type§r§8: §aSpielregel", "  §7Status§r§8: §2aktiviert", "  §7Heilung durch Suppen§r§8: §2" + SpielregelConfig.get().getInt("SoupHeal") + "HP", "", "§a§oLinksklick§r§8: §9Status ändern", "§a§oRechtsklick§r§8: §9Einstellungen"));
+        } else if (!SpielregelConfig.get().getBoolean("Soup")) {
+            inv.setItem(10,createGuiItem(Material.MUSHROOM_STEW, "§aSoup", "", " §9§nBeschreibung§r§8:", "  §7Heile dich mit §9Pilzsuppen§7,", "  §9Borschtsch §7und §9Kaninchenragout§7.", "", " §9§nEigenschaften§r§8:", "  §7Type§r§8: §aSpielregel", "  §7Status§r§8: §4deaktiviert", "  §7Heilung durch Suppen§r§8: §2" + SpielregelConfig.get().getInt("SoupHeal") + "HP", "", "§a§oLinksklick§r§8: §9Status ändern", "§a§oRechtsklick§r§8: §9Einstellungen"));
+        }
+        inv.setItem(11,createGuiItem(Material.MELON_SLICE, " "));
+        inv.setItem(12,createGuiItem(Material.RED_TULIP, " "));
+        inv.setItem(13,createGuiItem(Material.GOLDEN_APPLE, " "));
+        inv.setItem(14,createGuiItem(Material.REDSTONE, " "));
+        inv.setItem(15,createGuiItem(Material.IRON_SWORD, " "));
+        inv.setItem(16,createGuiItem(Material.REDSTONE, " "));
         inv.setItem(17,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(18,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
-        inv.setItem(19,createGuiItem(Material.EXPERIENCE_BOTTLE, " "));
+        if (SpielregelConfig.get().getBoolean("Schadensanzeige")) {
+            inv.setItem(19, createGuiItem(Material.REDSTONE_LAMP, "§aSchadensanzeige", "", " §9§nBeschreibung§r§8:", "  §7Teile deine §9Leben§7,", "  §7mit anderen §9Spielern§7.", "", " §9§nEigenschaften§r§8:", "  §7Type§r§8: §aSpielregel", "  §7Status§r§8: §2aktiviert", "", "§a§oKlick§r§8: §9Status ändern"));
+        } else if (!SpielregelConfig.get().getBoolean("Schadensanzeige")) {
+            inv.setItem(19,createGuiItem(Material.REDSTONE_LAMP, "§aSchadensanzeige", "", " §9§nBeschreibung§r§8:", "  §7Teile deine §9Leben§7,", "  §7mit anderen §9Spielern§7.", "", " §9§nEigenschaften§r§8:", "  §7Type§r§8: §aSpielregel", "  §7Status§r§8: §4deaktiviert", "", "§a§oKlick§r§8: §9Status ändern"));
+        }
         inv.setItem(20,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(21,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(22,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));

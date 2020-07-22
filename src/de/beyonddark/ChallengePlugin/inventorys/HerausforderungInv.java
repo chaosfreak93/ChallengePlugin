@@ -4,6 +4,7 @@
 
 package de.beyonddark.ChallengePlugin.inventorys;
 
+import de.beyonddark.ChallengePlugin.files.HerausforderungConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class HerausforderungInv {
 
     // You can call this whenever you want to put the items in
     public void initializeItems() {
+        HerausforderungConfig.reload();
         inv.setItem(0,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(1,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(2,createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
