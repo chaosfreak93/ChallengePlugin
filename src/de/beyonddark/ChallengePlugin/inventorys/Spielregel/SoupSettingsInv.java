@@ -27,6 +27,7 @@ public class SoupSettingsInv {
 
     // You can call this whenever you want to put the items in
     public void initializeItems() {
+        SpielregelConfig.reload();
         inv.setItem(0, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(1, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));
         inv.setItem(2, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, " "));

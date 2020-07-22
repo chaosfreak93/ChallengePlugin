@@ -49,6 +49,8 @@ public class Main extends JavaPlugin {
             SpielregelConfig.setup();
             SpielregelConfig.get().addDefault("Soup", false);
             SpielregelConfig.get().addDefault("SoupHeal", 4);
+            SpielregelConfig.get().addDefault("MaxLebenStatus", false);
+            SpielregelConfig.get().addDefault("MaxLeben", 20);
             SpielregelConfig.get().addDefault("Schadensanzeige", false);
             SpielregelConfig.get().options().copyDefaults(true);
             SpielregelConfig.save();

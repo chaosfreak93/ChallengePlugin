@@ -176,7 +176,7 @@ public class EventListener implements Listener {
                 p.closeInventory();
                 SpielregelInv inv = new SpielregelInv();
                 inv.openInventory(p);
-            } else if (Objects.requireNonNull(whatWasClicked.getItemMeta()).getDisplayName().equals("")) {
+            } else if (Objects.requireNonNull(whatWasClicked.getItemMeta()).getDisplayName().equals("§aMaximale Leben")) {
                 p.closeInventory();
                 SpielregelInv inv = new SpielregelInv();
                 inv.openInventory(p);
@@ -193,6 +193,32 @@ public class EventListener implements Listener {
             } else if (whatWasClicked.getType() == Material.BARRIER) {
                 p.closeInventory();
                 EinstellungInv inv = new EinstellungInv();
+                inv.openInventory(p);
+            }
+            e.setCancelled(true);
+        }
+        if (e.getView().getTitle().equals("§6Einstellungen §8- §aSoup Settings")) {
+            if (whatWasClicked.getType().equals(Material.GREEN_WOOL)) {
+                int soupHeal = SpielregelConfig.get().getInt("SoupHeal");
+                if (soupHeal <= 9) {
+                    SpielregelConfig.set().set("SoupHeal", soupHeal + 1);
+                    SpielregelConfig.save();
+                    SpielregelConfig.reload();
+                    SoupSettingsInv inv = new SoupSettingsInv();
+                    inv.openInventory(p);
+                }
+            } else if (whatWasClicked.getType().equals(Material.RED_WOOL)) {
+                int soupHeal = SpielregelConfig.get().getInt("SoupHeal");
+                if (soupHeal >= 1) {
+                    SpielregelConfig.set().set("SoupHeal", soupHeal - 1);
+                    SpielregelConfig.save();
+                    SpielregelConfig.reload();
+                    SoupSettingsInv inv = new SoupSettingsInv();
+                    inv.openInventory(p);
+                }
+            } else if (whatWasClicked.getType().equals(Material.BARRIER)) {
+                p.closeInventory();
+                SpielregelInv inv = new SpielregelInv();
                 inv.openInventory(p);
             }
             e.setCancelled(true);
