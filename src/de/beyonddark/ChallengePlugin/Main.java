@@ -47,6 +47,9 @@ public class Main extends JavaPlugin {
             SpielaenderungConfig.save();
 
             SpielregelConfig.setup();
+            SpielregelConfig.get().addDefault("Soup", false);
+            SpielregelConfig.get().addDefault("SoupHeal", 4);
+            SpielregelConfig.get().addDefault("Schadensanzeige", false);
             SpielregelConfig.get().options().copyDefaults(true);
             SpielregelConfig.save();
         } catch (IOException e) {
