@@ -21,7 +21,7 @@ public class Timer {
                 @Override
                 public void run() {
                     int timer = MainConfig.get().getInt("timerTime");
-                    MainConfig.get().set("timerTime", timer + 1);
+                    MainConfig.set().set("timerTime", timer + 1);
                     try {
                         MainConfig.save();
                     } catch (IOException e) {
@@ -29,7 +29,12 @@ public class Timer {
                     }
                 }
             }, 0, 20);
-            MainConfig.get().set("timerPaused", false);
+            MainConfig.set().set("timerPaused", false);
+            try {
+                MainConfig.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage("§r§7§lDer Timer §r§a§lwurde gestartet§r§7§l.§r");
                 player.sendTitle("§r§7§lDer Timer", "§r§a§lwurde gestartet§r§7§l.§r", 15,20, 15);
@@ -42,7 +47,7 @@ public class Timer {
     public static void stop(Player p) {
         if (task > 0) {
             Bukkit.getScheduler().cancelTask(task);
-            MainConfig.get().set("timerPaused", true);
+            MainConfig.set().set("timerPaused", true);
             try {
                 MainConfig.save();
             } catch (IOException e) {
@@ -59,7 +64,7 @@ public class Timer {
     }
 
     public static void reset() {
-        MainConfig.get().set("timerTime", 0);
+        MainConfig.set().set("timerTime", 0);
         try {
             MainConfig.save();
         } catch (IOException e) {
