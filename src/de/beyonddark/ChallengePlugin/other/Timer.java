@@ -15,7 +15,7 @@ public class Timer {
 
     public static int task = 0;
 
-    public static void start(Player p) {
+    public static void resume(Player p) {
         if (task < 2) {
             task = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("Challenge")), new Runnable() {
                 @Override

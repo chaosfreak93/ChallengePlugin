@@ -16,8 +16,8 @@ public class TimerCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length > 0) {
             switch (args[0]) {
-                case "start" -> {
-                    Timer.start((Player) sender);
+                case "resume" -> {
+                    Timer.resume((Player) sender);
                     return true;
                 }
                 case "stop" -> {

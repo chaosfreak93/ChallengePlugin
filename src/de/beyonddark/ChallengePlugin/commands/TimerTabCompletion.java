@@ -19,7 +19,7 @@ public class TimerTabCompletion implements TabCompleter {
         if (args.length == 1) {
             List<String> arguments = new ArrayList<>();
 
-            arguments.add("start");
+            arguments.add("resume");
             arguments.add("stop");
             arguments.add("reset");
 
